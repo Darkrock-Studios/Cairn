@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -36,18 +37,28 @@ public fun CairnAboutOverlay(
     val scope = rememberCoroutineScope()
     var present by remember { mutableStateOf(false) }
     var closing by remember { mutableStateOf(false) }
+    // Survives configuration changes: if the overlay was already open when
+    // the host recreated us, restore straight to Open — never replay the
+    // ceremony (or its sound) because the phone rotated.
+    val wasOpen = rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(visible) {
         if (visible && !present) {
             present = true
             closing = false
-            ceremony.runEnter()
+            if (wasOpen.value) {
+                ceremony.snapOpen()
+            } else {
+                ceremony.runEnter()
+                wasOpen.value = true
+            }
         } else if (!visible && present && !closing) {
             // Host withdrew visibility directly: retreat, then settle.
             closing = true
             ceremony.runExit()
             present = false
             closing = false
+            wasOpen.value = false
         }
     }
 
@@ -58,6 +69,7 @@ public fun CairnAboutOverlay(
                 ceremony.runExit()
                 present = false
                 closing = false
+                wasOpen.value = false
                 onDismissed()
             }
         }

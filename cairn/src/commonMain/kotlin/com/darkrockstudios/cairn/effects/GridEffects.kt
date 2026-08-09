@@ -171,7 +171,7 @@ internal class GridEffectsState(density: Density) {
             featherPx = 40 * dp,
             durationMillis = 1600,
             startAlpha = 1f,
-            color = CairnColors.ShockWarm.copy(alpha = 0.32f),
+            color = CairnColors.ShockWarm.copy(alpha = 0.45f),
             easing = shockEasing,
         )
         wake()
@@ -185,7 +185,7 @@ internal class GridEffectsState(density: Density) {
             featherPx = 18 * dp,
             durationMillis = 1800,
             startAlpha = 0.55f,
-            color = CairnColors.ShockWarm.copy(alpha = 0.14f),
+            color = CairnColors.ShockWarm.copy(alpha = 0.2f),
             easing = LinearOutSlowInEasing,
         )
         wake()
@@ -199,8 +199,8 @@ internal class GridEffectsState(density: Density) {
             endRadiusPx = 300 * dp,
             featherPx = 22 * dp,
             durationMillis = 850,
-            startAlpha = 0.9f,
-            color = base.copy(alpha = 0.38f),
+            startAlpha = 1f,
+            color = base.copy(alpha = 0.5f),
             easing = LinearOutSlowInEasing,
         )
         wake()

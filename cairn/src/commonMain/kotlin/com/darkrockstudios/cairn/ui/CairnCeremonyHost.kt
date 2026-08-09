@@ -20,7 +20,7 @@ import com.darkrockstudios.cairn.CairnConfig
 import com.darkrockstudios.cairn.effects.CeremonyState
 import com.darkrockstudios.cairn.theme.CairnColors
 
-private val EtchLine = Color(0xFFFFEBD2).copy(alpha = 0.11f)
+private val EtchLine = Color(0xFFFFEBD2).copy(alpha = 0.14f)
 
 /**
  * The ceremony layer stack, bottom to top: whatever the host drew (visible
@@ -99,7 +99,7 @@ private fun DrawScope.drawSurgeGrid(surge: Float, seed: Int) {
     val spacing = 32.dp.toPx()
     // Peak per-line alpha; flicker weights average ~0.6 of it, so the surge
     // as a whole still lands as bright as a uniform 0.18 flash would.
-    val peak = 0.28f * surge
+    val peak = 0.34f * surge
     var index = 0
     var x = spacing
     while (x < size.width) {

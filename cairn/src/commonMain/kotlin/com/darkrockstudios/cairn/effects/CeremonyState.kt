@@ -66,6 +66,15 @@ internal class CeremonyState(
         phase = Phase.Open
     }
 
+    /**
+     * Jump straight to Open with no ceremony (and, since Entering is never
+     * observed, no rez-in): restoring after a configuration change must not
+     * replay the entrance.
+     */
+    fun snapOpen() {
+        phase = Phase.Open
+    }
+
     suspend fun runExit() {
         if (phase == Phase.Leaving || phase == Phase.Hidden) return
         phase = Phase.Leaving

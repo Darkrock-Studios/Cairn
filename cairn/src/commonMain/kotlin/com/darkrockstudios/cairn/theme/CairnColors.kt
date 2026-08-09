@@ -16,10 +16,10 @@ internal object CairnColors {
 
     /** Resting survey-grid line. Brighter than the website's 0.021 — that
      *  value was tuned for browser gamma and disappears on many screens. */
-    val GridLine = Color.White.copy(alpha = 0.035f)
+    val GridLine = Color.White.copy(alpha = 0.055f)
 
     /** Grid brightened by the attractor flashlight. */
-    val GridBright = Color.White.copy(alpha = 0.17f)
+    val GridBright = Color.White.copy(alpha = 0.28f)
 
     /** Warm tone for shockwaves and click pulses. */
     val ShockWarm = Color(0xFFFFCDA0)

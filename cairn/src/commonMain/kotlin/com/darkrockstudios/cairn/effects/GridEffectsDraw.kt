@@ -36,7 +36,7 @@ internal fun DrawScope.drawTiltLight(state: GridEffectsState) {
     val radius = 260 * density
     drawCircle(
         brush = Brush.radialGradient(
-            0f to CairnColors.SparkWarm.copy(alpha = 0.045f),
+            0f to CairnColors.SparkWarm.copy(alpha = 0.07f),
             0.7f to Color.Transparent,
             center = center,
             radius = radius,
@@ -146,8 +146,8 @@ private fun DrawScope.drawSpark(spark: SparkEffect, now: Long) {
         Offset(spark.lineCoord, along) to Offset(spark.lineCoord, along + len)
     }
 
-    val core = CairnColors.SparkWarm.copy(alpha = 0.55f * envelope)
-    val glow = CairnColors.SparkWarm.copy(alpha = 0.18f * envelope)
+    val core = CairnColors.SparkWarm.copy(alpha = 0.7f * envelope)
+    val glow = CairnColors.SparkWarm.copy(alpha = 0.24f * envelope)
     val brush = Brush.linearGradient(
         0f to Color.Transparent,
         0.5f to core,
