@@ -1,0 +1,21 @@
+Cairn
+Copyright 2026 Adam Brown (Wavesonics)
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+BRAND ASSETS ARE NOT COVERED BY THE CODE LICENSE
+------------------------------------------------
+The "Dark Rock Studios" name, the mountain ("summit") logo, the bundled
+application icons, and the identities of the applications in the baked
+catalog are trademarks and/or copyrighted brand assets of Adam Brown.
+They are included in this repository and its published artifacts solely so
+that Dark Rock Studios applications can display them, and are expressly
+NOT licensed under Apache-2.0 or any other open license.
+
+You may use the Cairn code to build an about screen for your own projects,
+with your own branding. You may not use the Dark Rock Studios name, logo,
+or app icons, or otherwise present your software as being made by or
+affiliated with Dark Rock Studios.
+
+Bundled fonts (Zilla Slab, JetBrains Mono) are licensed under the SIL Open
+Font License 1.1 — see NOTICE-FONTS.md.

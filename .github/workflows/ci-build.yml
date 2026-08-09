@@ -1,0 +1,47 @@
+name: CI Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          # Tests + all local targets (desktop, android, wasm) and the iOS
+          # klibs — Apple targets compile (not link) fine on Linux.
+          - target: "check :cairn:compileKotlinIosArm64 :cairn:compileKotlinIosSimulatorArm64"
+            os: ubuntu-latest
+          # Real framework link of the sample, so iOS breakage surfaces on
+          # every push instead of at release time.
+          - target: ":sampleApp:linkDebugFrameworkIosSimulatorArm64"
+            os: macos-latest
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v3
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.konan
+          key: ${{ runner.os }}-${{ hashFiles('**/.lock') }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@ce999babab2de1c4b649dc15f0ee67e6246c994f
+        with:
+          arguments: ${{ matrix.target }}

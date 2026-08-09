@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Visibility for installed-app detection of the Dark Rock family.
+         Shipped with the library so hosts inherit it automatically. -->
+    <queries>
+        <package android:name="com.darkrockstudios.apps.fasttrack" />
+        <package android:name="com.darkrockstudios.apps.hammer.android" />
+        <package android:name="com.darkrockstudios.app.securecamera" />
+        <package android:name="com.darkrockstudios.apps.c2paverify" />
+    </queries>
+</manifest>
