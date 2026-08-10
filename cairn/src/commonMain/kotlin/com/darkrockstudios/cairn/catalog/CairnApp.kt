@@ -2,6 +2,7 @@ package com.darkrockstudios.cairn.catalog
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import com.darkrockstudios.cairn.CairnAppId
 import com.darkrockstudios.cairn.CairnLink
 import org.jetbrains.compose.resources.DrawableResource
 
@@ -14,7 +15,7 @@ import org.jetbrains.compose.resources.DrawableResource
  */
 @Immutable
 internal data class CairnApp(
-    val id: String,
+    val id: CairnAppId,
     val name: String,
     val tagline: String,
     val accent: Color,

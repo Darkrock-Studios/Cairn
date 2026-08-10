@@ -11,9 +11,9 @@ import kotlin.test.assertTrue
 
 class StoreRoutingTest {
 
-    private val hammer = findApp("hammer")!! // Play + F-Droid + hammer.ink
-    private val c2pa = findApp("c2paverify")!! // Play only
-    private val fugitive = findApp("fugitive")!! // no stores at all
+    private val hammer = findApp(CairnAppId.Hammer)!! // Play + F-Droid + hammer.ink
+    private val c2pa = findApp(CairnAppId.C2paVerify)!! // Play only
+    private val fugitive = findApp(CairnAppId.Fugitive)!! // no stores at all
 
     @Test
     fun installedAlwaysWins() {
@@ -118,7 +118,8 @@ class StoreRoutingTest {
         assertEquals(6, cairnCatalog.size)
         assertTrue(cairnCatalog.all { it.canonicalUrl.startsWith("https://") })
         assertTrue(cairnCatalog.all { it.canonicalLabel.isNotBlank() })
-        // ids unique
+        // one entry per app, and every app in the enum has one
         assertEquals(cairnCatalog.size, cairnCatalog.map { it.id }.toSet().size)
+        assertEquals(CairnAppId.entries.toSet(), cairnCatalog.map { it.id }.toSet())
     }
 }

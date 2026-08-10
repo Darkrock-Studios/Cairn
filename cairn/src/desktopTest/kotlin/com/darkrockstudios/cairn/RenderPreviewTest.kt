@@ -97,7 +97,7 @@ class RenderPreviewTest {
             Box(Modifier.fillMaxSize().background(Color(0xFF1C0F33))) {
                 CairnAboutOverlay(
                     visible = true,
-                    config = CairnConfig(currentAppId = "fasttrack", versionName = "5.0.1"),
+                    config = CairnConfig(currentAppId = CairnAppId.FastTrack, versionName = "5.0.1"),
                     onDismissed = {},
                 )
             }
@@ -166,7 +166,7 @@ class RenderPreviewTest {
         ) {
             CairnAboutScreen(
                 config = CairnConfig(
-                    currentAppId = "fasttrack",
+                    currentAppId = CairnAppId.FastTrack,
                     versionName = "5.0.1",
                     entrance = CairnEntrance.None,
                 ),

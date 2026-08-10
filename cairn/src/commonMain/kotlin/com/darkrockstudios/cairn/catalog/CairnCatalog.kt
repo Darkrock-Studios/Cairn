@@ -1,6 +1,7 @@
 package com.darkrockstudios.cairn.catalog
 
 import androidx.compose.ui.graphics.Color
+import com.darkrockstudios.cairn.CairnAppId
 import com.darkrockstudios.cairn.CairnLink
 import com.darkrockstudios.cairn.generated.resources.Res
 import com.darkrockstudios.cairn.generated.resources.cairn_icon_c2paverify
@@ -17,7 +18,7 @@ import com.darkrockstudios.cairn.generated.resources.cairn_icon_snapsafe
  */
 internal val cairnCatalog: List<CairnApp> = listOf(
     CairnApp(
-        id = "fasttrack",
+        id = CairnAppId.FastTrack,
         name = "Fast Track",
         tagline = "Track what your body is doing while fasting",
         accent = Color(0xFF7E14DC),
@@ -31,7 +32,7 @@ internal val cairnCatalog: List<CairnApp> = listOf(
         androidPackage = "com.darkrockstudios.apps.fasttrack",
     ),
     CairnApp(
-        id = "hammer",
+        id = CairnAppId.Hammer,
         name = "Hammer",
         tagline = "A simple tool for building stories.",
         accent = Color(0xFFB7410E),
@@ -45,7 +46,7 @@ internal val cairnCatalog: List<CairnApp> = listOf(
         androidPackage = "com.darkrockstudios.apps.hammer.android",
     ),
     CairnApp(
-        id = "snapsafe",
+        id = CairnAppId.SnapSafe,
         name = "SnapSafe",
         tagline = "Snap pics of anything, safely.",
         accent = Color(0xFF3DDC84),
@@ -59,7 +60,7 @@ internal val cairnCatalog: List<CairnApp> = listOf(
         androidPackage = "com.darkrockstudios.app.securecamera",
     ),
     CairnApp(
-        id = "fugitive",
+        id = CairnAppId.Fugitive,
         name = "Fugitive",
         tagline = "Multiplayer hide and seek.",
         accent = Color(0xFFE3A72F),
@@ -70,7 +71,7 @@ internal val cairnCatalog: List<CairnApp> = listOf(
         githubUrl = "https://github.com/FugitiveTheGame/Fugitive",
     ),
     CairnApp(
-        id = "c2paverify",
+        id = CairnAppId.C2paVerify,
         name = "C2PA Verify",
         tagline = "See who made a photo, and whether you can trust it.",
         accent = Color(0xFF2CB5AA),
@@ -83,7 +84,7 @@ internal val cairnCatalog: List<CairnApp> = listOf(
         androidPackage = "com.darkrockstudios.apps.c2paverify",
     ),
     CairnApp(
-        id = "cleancopy",
+        id = CairnAppId.CleanCopy,
         name = "CleanCopy",
         tagline = "Copy URLs without the junk.",
         accent = Color(0xFF8FA5B5),
@@ -106,4 +107,4 @@ internal val cairnStudio = StudioInfo(
     sponsorsUrl = "https://github.com/sponsors/Wavesonics",
 )
 
-internal fun findApp(id: String): CairnApp? = cairnCatalog.firstOrNull { it.id == id }
+internal fun findApp(id: CairnAppId): CairnApp? = cairnCatalog.firstOrNull { it.id == id }

@@ -42,7 +42,7 @@ Box(Modifier.fillMaxSize()) {
     CairnAboutOverlay(
         visible = aboutVisible,
         config = CairnConfig(
-            currentAppId = "fasttrack",   // catalog id of YOUR app
+            currentAppId = CairnAppId.FastTrack,   // YOUR app
             versionName = BuildConfig.VERSION_NAME,
         ),
         onDismissed = { aboutVisible = false },
@@ -56,7 +56,7 @@ Or as a standalone destination: `CairnAboutScreen(config, onClose = { ... })`.
 
 | Parameter | Default | Notes |
 |---|---|---|
-| `currentAppId` | — | `fasttrack`, `hammer`, `snapsafe`, `fugitive`, `c2paverify`, `cleancopy` |
+| `currentAppId` | — | `CairnAppId`: `FastTrack`, `Hammer`, `SnapSafe`, `Fugitive`, `C2paVerify`, `CleanCopy` |
 | `versionName` | — | shown in the version stamp |
 | `entrance` | `Full` | `Full` (~1.1s etch/flood/ignite) · `Quick` (~0.7s) · `None` (fade). Reduced-motion settings force `None`. |
 | `soundDefault` | `true` | initial sound state; the user's mute toggle persists and wins |

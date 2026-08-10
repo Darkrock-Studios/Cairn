@@ -10,13 +10,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.darkrockstudios.cairn.CairnAboutOverlay
+import com.darkrockstudios.cairn.CairnAppId
 import com.darkrockstudios.cairn.CairnConfig
 
 @Composable
 fun App() {
     // Saveable so the overlay survives rotation / process recreation.
     var aboutVisible by rememberSaveable { mutableStateOf(false) }
-    val config = remember { CairnConfig(currentAppId = "fasttrack", versionName = "5.0.1") }
+    val config = remember { CairnConfig(currentAppId = CairnAppId.FastTrack, versionName = "5.0.1") }
 
     Box(Modifier.fillMaxSize()) {
         FakeFastTrackScreen(onAboutClick = { aboutVisible = true })

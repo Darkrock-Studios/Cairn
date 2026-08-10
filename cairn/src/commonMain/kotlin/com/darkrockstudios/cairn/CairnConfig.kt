@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 /**
  * Host-app configuration for the Cairn about screen.
  *
- * @param currentAppId Catalog id of the hosting app (e.g. "fasttrack"); selects the
+ * @param currentAppId Which app is hosting us (e.g. [CairnAppId.FastTrack]); selects the
  *   accent for the "This App" section and excludes it from the family list.
  * @param versionName Version string shown in the terminal stamp, e.g. "5.0.1".
  * @param entrance How much ceremony the entrance plays.
@@ -17,7 +17,7 @@ import androidx.compose.runtime.Immutable
  */
 @Immutable
 public class CairnConfig(
-    public val currentAppId: String,
+    public val currentAppId: CairnAppId,
     public val versionName: String,
     public val entrance: CairnEntrance = CairnEntrance.Full,
     public val soundDefault: Boolean = true,
