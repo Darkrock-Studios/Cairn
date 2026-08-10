@@ -36,6 +36,8 @@ internal data class CairnApp(
 @Immutable
 internal data class StudioInfo(
     val links: List<CairnLink>,
+    /** Broadcast socials — always rendered on their own chip row. */
+    val socials: List<CairnLink>,
     val patreonUrl: String,
     val sponsorsUrl: String,
     val discordUrl: String,

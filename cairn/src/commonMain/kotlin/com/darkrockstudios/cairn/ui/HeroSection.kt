@@ -30,6 +30,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 internal fun HeroSection(
     links: List<CairnLink>,
+    socials: List<CairnLink>,
     onOpenUrl: (String) -> Unit,
     onSummitTap: () -> Unit,
     onSummitPositioned: (LayoutCoordinates) -> Unit,
@@ -82,6 +83,20 @@ internal fun HeroSection(
         ) {
             links.forEach { link ->
                 Chip(label = link.label, onClick = { onOpenUrl(link.url) })
+            }
+        }
+        // Broadcast socials: always their own line under the primary links.
+        if (socials.isNotEmpty()) {
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .ignite(IgniteCues.CHIPS)
+                    .padding(top = 8.dp),
+            ) {
+                socials.forEach { link ->
+                    Chip(label = link.label, onClick = { onOpenUrl(link.url) })
+                }
             }
         }
     }

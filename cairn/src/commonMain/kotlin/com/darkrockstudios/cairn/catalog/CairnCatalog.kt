@@ -101,6 +101,8 @@ internal val cairnStudio = StudioInfo(
         CairnLink("Website", "https://darkrockstudios.com"),
         CairnLink("GitHub", "https://github.com/Wavesonics"),
         CairnLink("Discord", "https://discord.gg/ju2RQa5x8W"),
+    ),
+    socials = listOf(
         CairnLink("Mastodon", "https://mastodon.social/@DarkRockStudios"),
         CairnLink("Bluesky", "https://bsky.app/profile/darkrockstudios.bsky.social"),
     ),

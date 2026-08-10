@@ -189,6 +189,7 @@ internal fun CairnRoot(
                     ) {
                         HeroSection(
                             links = cairnStudio.links + config.extraLinks,
+                            socials = cairnStudio.socials,
                             onOpenUrl = onOpenUrl,
                             onSummitTap = {
                                 effects.summitCenter()?.let { effects.strike(it) }
