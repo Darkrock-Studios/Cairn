@@ -38,4 +38,5 @@ internal data class StudioInfo(
     val links: List<CairnLink>,
     val patreonUrl: String,
     val sponsorsUrl: String,
+    val discordUrl: String,
 )

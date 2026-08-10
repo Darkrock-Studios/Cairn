@@ -100,11 +100,13 @@ internal val cairnStudio = StudioInfo(
     links = listOf(
         CairnLink("Website", "https://darkrockstudios.com"),
         CairnLink("GitHub", "https://github.com/Wavesonics"),
+        CairnLink("Discord", "https://discord.gg/ju2RQa5x8W"),
         CairnLink("Mastodon", "https://mastodon.social/@DarkRockStudios"),
         CairnLink("Bluesky", "https://bsky.app/profile/darkrockstudios.bsky.social"),
     ),
     patreonUrl = "https://patreon.com/DarkRockStudios",
     sponsorsUrl = "https://github.com/sponsors/Wavesonics",
+    discordUrl = "https://discord.gg/ju2RQa5x8W",
 )
 
 internal fun findApp(id: CairnAppId): CairnApp? = cairnCatalog.firstOrNull { it.id == id }

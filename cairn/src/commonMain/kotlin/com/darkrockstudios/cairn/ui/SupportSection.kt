@@ -61,6 +61,8 @@ internal fun SupportSection(
         ) {
             Chip("Patreon", onClick = { onOpenUrl(studio.patreonUrl) })
             Chip("GitHub Sponsors", onClick = { onOpenUrl(studio.sponsorsUrl) })
+            // The third way to support: show up.
+            Chip("Discord", onClick = { onOpenUrl(studio.discordUrl) })
         }
     }
 }
