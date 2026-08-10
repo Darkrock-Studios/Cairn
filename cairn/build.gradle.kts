@@ -89,7 +89,7 @@ mavenPublishing {
     pom {
         name.set("Cairn")
         description.set("A Compose Multiplatform About screen for the Dark Rock Studios family of apps.")
-        url.set("https://github.com/Wavesonics/Cairn")
+        url.set("https://github.com/Darkrock-Studios/Cairn")
 
         licenses {
             license {
@@ -99,12 +99,12 @@ mavenPublishing {
         }
         issueManagement {
             system.set("Github")
-            url.set("https://github.com/Wavesonics/Cairn/issues")
+            url.set("https://github.com/Darkrock-Studios/Cairn/issues")
         }
         scm {
-            connection.set("scm:git:git://github.com/Wavesonics/Cairn.git")
-            developerConnection.set("scm:git:ssh://github.com/Wavesonics/Cairn.git")
-            url.set("https://github.com/Wavesonics/Cairn")
+            connection.set("scm:git:git://github.com/Darkrock-Studios/Cairn.git")
+            developerConnection.set("scm:git:ssh://github.com/Darkrock-Studios/Cairn.git")
+            url.set("https://github.com/Darkrock-Studios/Cairn")
         }
         developers {
             developer {
