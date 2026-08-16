@@ -20,6 +20,7 @@ class WavDumpTest {
     fun dumpAllSounds() {
         dump("strike", CairnSynth.strike)
         dump("thock", CairnSynth.thock)
+        dump("tap", CairnSynth.tap)
         dump("rez-in", CairnSynth.rezIn)
         dump("rez-out", CairnSynth.rezOut)
         dump("hum-loop", CairnSynth.humLoop)

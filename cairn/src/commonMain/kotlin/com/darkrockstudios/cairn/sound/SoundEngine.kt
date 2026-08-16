@@ -27,6 +27,7 @@ internal class SoundEngine(
 
     private val clock = TimeSource.Monotonic
     private var lastThock = clock.markNow()
+    private var lastTap = clock.markNow()
     private var loopStarted = false
 
     fun toggleMuted() {
@@ -50,6 +51,14 @@ internal class SoundEngine(
         if (lastThock.elapsedNow().inWholeMilliseconds < 70) return
         lastThock = clock.markNow()
         play(CairnSynth.thock)
+    }
+
+    /** A tap on dead space, paired with the grid's click pulse. */
+    fun tap() {
+        if (muted) return
+        if (lastTap.elapsedNow().inWholeMilliseconds < 90) return
+        lastTap = clock.markNow()
+        play(CairnSynth.tap)
     }
 
     /** A tap on the horizon: the hum blooms fast and dissipates. */

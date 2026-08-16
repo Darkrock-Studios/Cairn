@@ -12,6 +12,7 @@ class CairnSynthTest {
         val sr = CairnSynth.SAMPLE_RATE
         assertTrue(CairnSynth.strike.size == (1.15f * sr).toInt())
         assertTrue(CairnSynth.thock.size == (0.1f * sr).toInt())
+        assertTrue(CairnSynth.tap.size == (0.18f * sr).toInt())
         assertTrue(CairnSynth.rezIn.size == (1.2f * sr).toInt())
         assertTrue(CairnSynth.rezOut.size == (0.6f * sr).toInt())
         assertTrue(CairnSynth.humPulse.size == (1.0f * sr).toInt())
@@ -23,6 +24,7 @@ class CairnSynthTest {
         listOf(
             CairnSynth.strike,
             CairnSynth.thock,
+            CairnSynth.tap,
             CairnSynth.rezIn,
             CairnSynth.rezOut,
             CairnSynth.humPulse,

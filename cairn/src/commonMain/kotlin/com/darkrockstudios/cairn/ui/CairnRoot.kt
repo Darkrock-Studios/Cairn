@@ -24,10 +24,12 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,18 +49,16 @@ import com.darkrockstudios.cairn.CairnConfig
 import com.darkrockstudios.cairn.catalog.cairnCatalog
 import com.darkrockstudios.cairn.catalog.cairnStudio
 import com.darkrockstudios.cairn.catalog.findApp
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import com.darkrockstudios.cairn.effects.AttractorSource
 import com.darkrockstudios.cairn.effects.CeremonyState
 import com.darkrockstudios.cairn.effects.IgniteCues
 import com.darkrockstudios.cairn.effects.LocalCeremony
-import com.darkrockstudios.cairn.effects.ignite
 import com.darkrockstudios.cairn.effects.LocalGridEffects
 import com.darkrockstudios.cairn.effects.LocalSeamRegistry
 import com.darkrockstudios.cairn.effects.SeamRegistry
 import com.darkrockstudios.cairn.effects.drawGridEffects
 import com.darkrockstudios.cairn.effects.drawSurveyGrid
+import com.darkrockstudios.cairn.effects.ignite
 import com.darkrockstudios.cairn.effects.rememberGridEffects
 import com.darkrockstudios.cairn.platform.CairnServices
 import com.darkrockstudios.cairn.platform.LocalCairnServices
@@ -188,7 +188,7 @@ internal fun CairnRoot(
                             contentCoords = it
                             effects.contentCoords = it
                         }
-                        .cairnPointerEffects(effects, seams, sound) { mouseSeen = true },
+                        .cairnPointerEffects(effects, seams, sound, feedback) { mouseSeen = true },
                 ) {
                     // The grid/scrim/seams stay truly edge-to-edge (they draw
                     // behind); only the content column steps clear of the
@@ -287,6 +287,7 @@ private fun Modifier.cairnPointerEffects(
     effects: com.darkrockstudios.cairn.effects.GridEffectsState,
     seams: SeamRegistry,
     sound: SoundEngine,
+    feedback: CairnFeedback,
     onMouseSeen: () -> Unit,
 ): Modifier = this
     .pointerInput(effects) {
@@ -341,6 +342,8 @@ private fun Modifier.cairnPointerEffects(
             val up = waitForUpOrCancellation(pass = PointerEventPass.Final)
             if (up != null && !up.isConsumed) {
                 effects.clickPulse(up.position)
+                sound.tap()
+                feedback.tap()
             }
         }
     }

@@ -52,8 +52,27 @@ internal object CairnSynth {
             addVoice(
                 buf,
                 freqStart = 190f, freqEnd = 70f, freqRampSec = 0.08f,
-                gain = listOf(0f to 0.5f, 0.09f to 0.001f),
+                gain = listOf(0f to 1.0f, 0.09f to 0.001f),
                 stopSec = 0.1f,
+                harmonics = 0.45f,
+            )
+        }
+    }
+
+    /**
+     * Taps on dead space: knuckle on basalt. A damped contact transient over
+     * a dark, fast-dying body — dry and unpitched where the thock is a clean
+     * note, so the two never blur together.
+     */
+    val tap: FloatArray by lazy {
+        render(0.18f) { buf ->
+            addTick(buf, atSec = 0f, strength = 0.55f, durSec = 0.04f, random = Random(0x7A9))
+            addVoice(
+                buf,
+                freqStart = 120f, freqEnd = 88f, freqRampSec = 0.07f,
+                gain = listOf(0f to 0.5f, 0.14f to 0.001f),
+                stopSec = 0.18f,
+                harmonics = 0.22f,
             )
         }
     }
