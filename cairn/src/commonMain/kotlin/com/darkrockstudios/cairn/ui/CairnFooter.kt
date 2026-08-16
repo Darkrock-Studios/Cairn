@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.darkrockstudios.cairn.theme.CairnColors
+import com.darkrockstudios.cairn.theme.LocalCairnEndGutter
 import com.darkrockstudios.cairn.theme.cairnType
 
 @Composable
@@ -24,6 +25,7 @@ internal fun CairnFooter(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .padding(end = LocalCairnEndGutter.current)
             .padding(top = 26.dp, bottom = 36.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

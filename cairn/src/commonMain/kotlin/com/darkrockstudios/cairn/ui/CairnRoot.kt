@@ -72,8 +72,12 @@ import com.darkrockstudios.cairn.sound.LocalSoundEngine
 import com.darkrockstudios.cairn.sound.SoundEngine
 import com.darkrockstudios.cairn.theme.CairnColors
 import com.darkrockstudios.cairn.theme.CairnTheme
+import com.darkrockstudios.cairn.theme.LocalCairnEndGutter
 import com.darkrockstudios.cairn.theme.LocalCairnWideLayout
 import com.darkrockstudios.cairn.theme.cairnType
+
+/** Widest the content column ever gets: the 664dp column plus its side padding. */
+private val CairnContentMaxWidth = 708.dp
 
 /** Internal orchestrator: layer stack, scroll, input, effects, sections. */
 @Composable
@@ -105,6 +109,7 @@ internal fun CairnRoot(
             val effects = rememberGridEffects()
             val seams = remember(effects) { SeamRegistry(effects) }
             var viewportSize by remember { mutableStateOf(Size.Zero) }
+            var mouseSeen by remember { mutableStateOf(false) }
             var summitCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
             var contentCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
@@ -150,7 +155,18 @@ internal fun CairnRoot(
                 )
             }
 
+            // The rail claims the right gutter. Wide windows already leave one
+            // beside the centered column; narrow ones have to give it up.
+            val railShowing = mouseSeen && scrollState.maxValue > 0
+            val freeGutter = ((maxWidth - CairnContentMaxWidth) / 2).coerceAtLeast(0.dp)
+            val endGutter = if (railShowing) {
+                (RailFootprint - freeGutter).coerceAtLeast(0.dp)
+            } else {
+                0.dp
+            }
+
             CompositionLocalProvider(
+                LocalCairnEndGutter provides endGutter,
                 LocalCairnWideLayout provides wide,
                 LocalGridEffects provides effects,
                 LocalSeamRegistry provides seams,
@@ -172,7 +188,7 @@ internal fun CairnRoot(
                             contentCoords = it
                             effects.contentCoords = it
                         }
-                        .cairnPointerEffects(effects, seams, sound),
+                        .cairnPointerEffects(effects, seams, sound) { mouseSeen = true },
                 ) {
                     // The grid/scrim/seams stay truly edge-to-edge (they draw
                     // behind); only the content column steps clear of the
@@ -239,6 +255,17 @@ internal fun CairnRoot(
                     )
                 }
 
+                // The rail shares the close button's axis: the ✕ caps the rod.
+                SurveyRail(
+                    scrollState = scrollState,
+                    viewportHeightPx = viewportSize.height,
+                    visible = mouseSeen && ceremony.phase == CeremonyState.Phase.Open,
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .windowInsetsPadding(WindowInsets.safeDrawing)
+                        .padding(top = 54.dp, bottom = 20.dp, end = RailEdgeInset),
+                )
+
                 CloseButton(
                     onClose = onClose,
                     modifier = Modifier
@@ -260,6 +287,7 @@ private fun Modifier.cairnPointerEffects(
     effects: com.darkrockstudios.cairn.effects.GridEffectsState,
     seams: SeamRegistry,
     sound: SoundEngine,
+    onMouseSeen: () -> Unit,
 ): Modifier = this
     .pointerInput(effects) {
         awaitPointerEventScope {
@@ -267,6 +295,7 @@ private fun Modifier.cairnPointerEffects(
                 val event = awaitPointerEvent(PointerEventPass.Initial)
                 val change = event.changes.firstOrNull() ?: continue
                 val isMouse = change.type == PointerType.Mouse
+                if (isMouse) onMouseSeen()
                 when (event.type) {
                     PointerEventType.Press,
                     PointerEventType.Move,

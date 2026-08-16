@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.darkrockstudios.cairn.effects.LocalSeamRegistry
 import com.darkrockstudios.cairn.theme.CairnColors
 import com.darkrockstudios.cairn.theme.LocalCairnAccent
+import com.darkrockstudios.cairn.theme.LocalCairnEndGutter
 import com.darkrockstudios.cairn.theme.LocalCairnWideLayout
 import com.darkrockstudios.cairn.theme.cairnType
 
@@ -122,7 +123,7 @@ internal fun SeamSection(
                     .align(Alignment.TopCenter)
                     .widthIn(max = if (wide) 664.dp else Dp.Unspecified)
                     .fillMaxWidth()
-                    .padding(horizontal = 22.dp)
+                    .padding(start = 22.dp, end = 22.dp + LocalCairnEndGutter.current)
                     .padding(top = 34.dp, bottom = 24.dp),
                 content = content,
             )

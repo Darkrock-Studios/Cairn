@@ -23,6 +23,13 @@ internal class SeamRegistry(private val effects: GridEffectsState) {
         var lastSide = 0
     }
 
+    /** One section's place on the survey rail. */
+    internal class Mark(
+        val contentTop: Float,
+        val accent: Color,
+        val lit: Boolean,
+    )
+
     private val entries = ArrayList<Entry>()
 
     var onCross: (Entry) -> Unit = {}
@@ -67,6 +74,12 @@ internal class SeamRegistry(private val effects: GridEffectsState) {
                 onCross(entry)
             }
         }
+    }
+
+    /** Every section's top edge in content space, for the rail's legend. */
+    fun marks(): List<Mark> = entries.mapNotNull { entry ->
+        val bounds = boundsInContent(entry) ?: return@mapNotNull null
+        Mark(bounds.top, entry.accent, entry.lit.value)
     }
 
     fun clearSides() {

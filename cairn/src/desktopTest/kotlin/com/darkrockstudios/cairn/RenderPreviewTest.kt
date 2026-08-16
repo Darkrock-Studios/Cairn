@@ -128,6 +128,65 @@ class RenderPreviewTest {
     }
 
     /**
+     * The survey rail: a mouse-driven desktop viewport, scrolled so the
+     * marker carries phosphor, then hovered so the scale brightens and the
+     * elevation readout appears.
+     */
+    @Test
+    fun renderSurveyRail() {
+        val density = 2f
+        val widthDp = 1280
+        scene(widthDp = widthDp, heightDp = 860, density = density).use { scene ->
+            var timeNanos = pumpFrames(scene, 0L, frames = 30, sleepMs = 50)
+
+            // A mouse move anywhere reveals the rail.
+            scene.sendPointerEvent(PointerEventType.Move, Offset(500f * density, 400f * density))
+            timeNanos = pumpFrames(scene, timeNanos, frames = 20, sleepMs = 20)
+
+            repeat(8) {
+                scene.sendPointerEvent(
+                    PointerEventType.Scroll,
+                    position = Offset(500f * density, 400f * density),
+                    scrollDelta = Offset(0f, 3f),
+                )
+                timeNanos = pumpFrames(scene, timeNanos, frames = 2)
+            }
+            save(scene.render(timeNanos), "cairn-rail-scrolling.png")
+
+            // Hover the rail itself: scale brightens, readout fades in.
+            val railAxis = (widthDp - 10 - 17).toFloat() * density
+            scene.sendPointerEvent(PointerEventType.Move, Offset(railAxis, 500f * density))
+            timeNanos = pumpFrames(scene, timeNanos, frames = 25, sleepMs = 20)
+            save(scene.render(timeNanos), "cairn-rail-hover.png")
+        }
+    }
+
+    /**
+     * A narrow desktop window: too tight for the rail to have a gutter of its
+     * own, so content has to give one up. Nothing may sit under the rail.
+     */
+    @Test
+    fun renderNarrowRail() {
+        val density = 2f
+        val widthDp = 520
+        scene(widthDp = widthDp, heightDp = 860, density = density).use { scene ->
+            var timeNanos = pumpFrames(scene, 0L, frames = 30, sleepMs = 50)
+            scene.sendPointerEvent(PointerEventType.Move, Offset(260f * density, 400f * density))
+            timeNanos = pumpFrames(scene, timeNanos, frames = 20, sleepMs = 20)
+            repeat(5) {
+                scene.sendPointerEvent(
+                    PointerEventType.Scroll,
+                    position = Offset(260f * density, 400f * density),
+                    scrollDelta = Offset(0f, 3f),
+                )
+                timeNanos = pumpFrames(scene, timeNanos, frames = 2)
+            }
+            timeNanos = pumpFrames(scene, timeNanos, frames = 30, sleepMs = 20)
+            save(scene.render(timeNanos), "cairn-rail-narrow.png")
+        }
+    }
+
+    /**
      * Tilt physics via CairnDebug: strong right-roll should slide the horizon
      * gleam, light every card uniformly (global sheen), shift the grid
      * parallax, and drift the ambient tilt light.

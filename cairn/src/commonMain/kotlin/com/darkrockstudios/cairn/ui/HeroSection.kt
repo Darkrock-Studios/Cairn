@@ -21,6 +21,7 @@ import com.darkrockstudios.cairn.effects.IgniteCues
 import com.darkrockstudios.cairn.effects.ignite
 import com.darkrockstudios.cairn.generated.resources.Res
 import com.darkrockstudios.cairn.generated.resources.cairn_summit
+import com.darkrockstudios.cairn.theme.LocalCairnEndGutter
 import com.darkrockstudios.cairn.theme.LocalCairnWideLayout
 import com.darkrockstudios.cairn.theme.cairnType
 import org.jetbrains.compose.resources.painterResource
@@ -42,7 +43,7 @@ internal fun HeroSection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp)
+            .padding(start = 24.dp, end = 24.dp + LocalCairnEndGutter.current)
             .padding(top = 42.dp, bottom = 30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
