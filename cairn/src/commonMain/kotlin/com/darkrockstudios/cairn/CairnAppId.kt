@@ -3,7 +3,8 @@ package com.darkrockstudios.cairn
 /**
  * The Dark Rock Studios apps Cairn knows about. A host names itself with one
  * of these in [CairnConfig.currentAppId]: it picks the accent for the "This
- * App" block and drops that app from the family list below it.
+ * App" block and drops that app from the family list below it. A host that is
+ * not in the catalog passes null and gets no "This App" block.
  *
  * [slug] is the app's key on the website (content/projects/<slug>/index.md),
  * the same key the catalog entries mirror, so a website→Kotlin generator can

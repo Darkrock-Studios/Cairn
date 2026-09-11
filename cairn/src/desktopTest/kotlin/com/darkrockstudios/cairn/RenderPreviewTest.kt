@@ -30,6 +30,10 @@ class RenderPreviewTest {
     fun renderTablet() = renderToFile("cairn-tablet.png", widthDp = 768, heightDp = 1700)
 
     @Test
+    fun renderNoCurrentApp() =
+        renderToFile("cairn-phone-no-app.png", widthDp = 420, heightDp = 2000, appId = null)
+
+    @Test
     fun renderTabletLandscape() =
         renderToFile("cairn-tablet-landscape.png", widthDp = 1280, heightDp = 1500)
 
@@ -217,7 +221,12 @@ class RenderPreviewTest {
         }
     }
 
-    private fun scene(widthDp: Int, heightDp: Int, density: Float = 2f): ImageComposeScene =
+    private fun scene(
+        widthDp: Int,
+        heightDp: Int,
+        density: Float = 2f,
+        appId: CairnAppId? = CairnAppId.FastTrack,
+    ): ImageComposeScene =
         ImageComposeScene(
             width = (widthDp * density).toInt(),
             height = (heightDp * density).toInt(),
@@ -225,7 +234,7 @@ class RenderPreviewTest {
         ) {
             CairnAboutScreen(
                 config = CairnConfig(
-                    currentAppId = CairnAppId.FastTrack,
+                    currentAppId = appId,
                     versionName = "5.0.1",
                     entrance = CairnEntrance.None,
                 ),
@@ -248,8 +257,8 @@ class RenderPreviewTest {
         return timeNanos
     }
 
-    private fun renderToFile(name: String, widthDp: Int, heightDp: Int) {
-        scene(widthDp, heightDp).use { sceneRef ->
+    private fun renderToFile(name: String, widthDp: Int, heightDp: Int, appId: CairnAppId? = CairnAppId.FastTrack) {
+        scene(widthDp, heightDp, appId = appId).use { sceneRef ->
             val timeNanos = pumpFrames(sceneRef, 0L, frames = 30, sleepMs = 50)
             save(sceneRef.render(timeNanos), name)
         }

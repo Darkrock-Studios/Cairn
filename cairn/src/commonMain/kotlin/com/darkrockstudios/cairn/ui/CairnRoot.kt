@@ -92,7 +92,7 @@ internal fun CairnRoot(
         // Background basalt comes from the ceremony host's scrim layer.
         BoxWithConstraints(modifier = modifier.fillMaxSize()) {
             val wide = maxWidth >= 620.dp
-            val currentApp = remember(config.currentAppId) { findApp(config.currentAppId) }
+            val currentApp = remember(config.currentAppId) { config.currentAppId?.let(::findApp) }
             val familyApps = remember(config.currentAppId) {
                 cairnCatalog.filter { it.id != config.currentAppId }
             }

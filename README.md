@@ -56,7 +56,7 @@ Or as a standalone destination: `CairnAboutScreen(config, onClose = { ... })`.
 
 | Parameter | Default | Notes |
 |---|---|---|
-| `currentAppId` | — | `CairnAppId`: `FastTrack`, `Hammer`, `SnapSafe`, `Fugitive`, `C2paVerify`, `CleanCopy` |
+| `currentAppId` | `null` | `CairnAppId`: `FastTrack`, `Hammer`, `SnapSafe`, `Fugitive`, `C2paVerify`, `CleanCopy`. `null` for a host outside the catalog: no "This App" block, and the family list is the whole catalog. |
 | `versionName` | — | shown in the version stamp |
 | `entrance` | `Full` | `Full` (~1.1s etch/flood/ignite) · `Quick` (~0.7s) · `None` (fade). Reduced-motion settings force `None`. |
 | `soundDefault` | `true` | initial sound state; the user's mute toggle persists and wins |
