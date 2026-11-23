@@ -30,6 +30,10 @@ dependencies {
 }
 ```
 
+On desktop, Cairn depends on the OS-neutral `compose.desktop.common`; your app
+supplies the platform runtime (`compose.desktop.currentOs`), as any Compose
+Desktop app already does.
+
 Overlay presentation (recommended — the entrance plays over your app's own
 screen). Place it as the last child of a full-screen container:
 
