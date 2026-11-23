@@ -42,7 +42,7 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
+        named("commonMain") {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
@@ -52,19 +52,13 @@ kotlin {
             }
         }
 
-        val commonTest by getting {
+        named("commonTest") {
             dependencies {
                 implementation(libs.jetbrains.kotlin.test)
             }
         }
 
-        val desktopMain by getting {
-            dependencies {
-                implementation(compose.desktop.currentOs)
-            }
-        }
-
-        val desktopTest by getting {
+        named("desktopTest") {
             dependencies {
                 implementation(libs.jetbrains.kotlin.test.junit)
                 implementation(compose.desktop.currentOs)
@@ -72,6 +66,9 @@ kotlin {
         }
     }
 }
+
+// commonTest has no Compose UI tests; this Compose check trips on the Skiko that main pulls in.
+tasks.matching { it.name == "checkComposeUiTestConfigurationForWasmJs" }.configureEach { enabled = false }
 
 compose.resources {
     publicResClass = false

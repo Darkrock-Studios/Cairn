@@ -48,7 +48,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        named("commonMain") {
             dependencies {
                 implementation(projects.cairn)
                 implementation(compose.runtime)
@@ -59,7 +59,7 @@ kotlin {
             }
         }
 
-        val desktopMain by getting {
+        named("desktopMain") {
             dependencies {
                 implementation(libs.kotlinx.coroutines.swing)
                 implementation(compose.desktop.currentOs)
